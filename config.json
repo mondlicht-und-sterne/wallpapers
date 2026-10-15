@@ -1,5 +1,5 @@
 [
-  {"name": "acryl-001", "tags": ["pink", "abstract"], "url": "Materialious.jpg"},
-  {"name": "acryl-002", "tags": ["blue", "nebula"], "url": "osu.jpg"},
-  {"name": "acryl-003", "tags": ["gold", "fluid"], "url": "tutamail.jpg"}
+  {"name": "Materialious", "tags": ["pink", "abstract"], "url": "Materialious.jpg"},
+  {"name": "osu", "tags": ["blue", "nebula"], "url": "osu.jpg"},
+  {"name": "tutamail", "tags": ["gold", "fluid"], "url": "tutamail.jpg"}
 ]
