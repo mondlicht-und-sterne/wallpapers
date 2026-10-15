@@ -1,86 +1,49 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>moooon wallpapers</title>
 <style>
-  body{background:#111;color:#eee;font-family:system-ui;margin:0;padding:20px}
-  header{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:20px}
-  .logo{font-weight:900;font-size:22px}
-  .logo span{color:#b68cff}
-  #search{flex:1;min-width:200px;padding:10px 14px;border-radius:999px;border:1px solid #333;background:#1a1a1a;color:#fff}
-  #filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
-  .filter{padding:6px 14px;border-radius:999px;border:0;background:#222;color:#ccc;cursor:pointer}
-  .filter.active{background:#b68cff;color:#111;font-weight:700}
-  #grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px}
-  .card{background:#1a1a1a;border-radius:16px;overflow:hidden;cursor:pointer}
-  .card img{width:100%;height:220px;object-fit:cover;display:block}
-  .card p{margin:8px 10px;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  #lightbox{position:fixed;inset:0;background:rgba(0,0,0,.9);display:none;align-items:center;justify-content:center;z-index:99;padding:20px}
-  #lightbox img{max-width:90vw;max-height:85vh;border-radius:12px}
-  #lightbox a{position:absolute;bottom:30px;background:#b68cff;color:#111;padding:10px 18px;border-radius:999px;text-decoration:none;font-weight:700}
+body{background:#111;color:#eee;font-family:system-ui;margin:0;padding:20px}
+#search{width:100%;max-width:400px;padding:10px 14px;border-radius:999px;border:1px solid #333;background:#1a1a1a;color:#fff;margin:16px 0}
+#filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.filter{padding:6px 14px;border-radius:999px;border:0;background:#222;color:#ccc;cursor:pointer}
+.filter.active{background:#b68cff;color:#111;font-weight:700}
+#grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
+.card{background:#1a1a1a;border-radius:16px;overflow:hidden;cursor:pointer}
+.card img{width:100%;height:210px;object-fit:cover;display:block}
+.card p{margin:8px 10px;font-size:13px}
+#lightbox{position:fixed;inset:0;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;z-index:99}
+#lightbox img{max-width:92vw;max-height:82vh;border-radius:12px}
 </style>
 </head>
 <body>
-
-<header>
-  <div class="logo">🌙 moooon <span>wallpapers</span></div>
-  <input id="search" placeholder="Suche: pink, abstract, nebula...">
-</header>
-
+<h2>🌙 moooon wallpapers</h2>
+<input id="search" placeholder="Suche...">
 <div id="filters"></div>
 <div id="grid"></div>
-
-<div id="lightbox" onclick="this.style.display='none'">
-  <img id="lb-img"><br>
-  <a id="lb-dl" href="" download>Download</a>
-</div>
-
+<div id="lightbox" onclick="this.style.display='none'"><img id="lb"></div>
 <script>
-let all = [];
-let activeFilter = 'all';
-
-fetch('config.json').then(r=>r.json()).then(data=>{
-  all = data;
-  buildFilters();
-  render();
-});
-
-function buildFilters(){
-  const tags = new Set();
-  all.forEach(i=> (i.tags||[]).forEach(t=>tags.add(t)));
-  const filtersDiv = document.getElementById('filters');
-  const allBtn = `<button class="filter active" onclick="setFilter('all',this)">All ${all.length}</button>`;
-  const tagBtns = [...tags].map(t=>`<button class="filter" onclick="setFilter('${t}',this)">${t}</button>`).join('');
-  filtersDiv.innerHTML = allBtn + tagBtns;
+let all=[];let active='all';
+fetch('config.json').then(r=>r.json()).then(d=>{all=d;build();render()});
+function build(){
+ const t=new Set();all.forEach(i=>(i.tags||[]).forEach(x=>t.add(x)));
+ document.getElementById('filters').innerHTML=`<button class="filter active" onclick="setF('all',this)">All ${all.length}</button>`+[...t].map(x=>`<button class="filter" onclick="setF('${x}',this)">${x}</button>`).join('');
 }
-function setFilter(f,el){
-  activeFilter=f;
-  document.querySelectorAll('.filter').forEach(b=>b.classList.remove('active'));
-  el.classList.add('active');
-  render();
-}
+function setF(f,el){active=f;document.querySelectorAll('.filter').forEach(b=>b.classList.remove('active'));el.classList.add('active');render()}
 function render(){
-  const q = document.getElementById('search').value.toLowerCase();
-  const grid = document.getElementById('grid');
-  grid.innerHTML = '';
-  all.filter(item=>{
-    const matchSearch = !q || item.name.toLowerCase().includes(q) || (item.tags||[]).join(' ').toLowerCase().includes(q);
-    const matchFilter = activeFilter==='all' || (item.tags||[]).includes(activeFilter);
-    return matchSearch && matchFilter;
-  }).forEach(item=>{
-    const d = document.createElement('div');
-    d.className='card';
-    d.innerHTML=`<img src="${item.thumbUrl||item.url}" loading="lazy"><p>${item.name}</p>`;
-    d.onclick=()=>openLb(item.url);
-    grid.appendChild(d);
-  });
-}
-function openLb(url){
-  document.getElementById('lb-img').src=url;
-  document.getElementById('lb-dl').href=url;
-  document.getElementById('lightbox').style.display='flex';
+ const q=document.getElementById('search').value.toLowerCase();
+ document.getElementById('grid').innerHTML='';
+ all.filter(i=>{
+  const s=!q||i.name.toLowerCase().includes(q)||(i.tags||[]).join(' ').toLowerCase().includes(q);
+  const fil=active==='all'||(i.tags||[]).includes(active);
+  return s&&fil;
+ }).forEach(i=>{
+  const d=document.createElement('div');d.className='card';
+  d.innerHTML=`<img src="${i.url}" loading="lazy"><p>${i.name}</p>`;
+  d.onclick=()=>{document.getElementById('lb').src=i.url;document.getElementById('lightbox').style.display='flex'};
+  document.getElementById('grid').appendChild(d);
+ });
 }
 document.getElementById('search').addEventListener('input',render);
 </script>
