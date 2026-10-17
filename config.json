@@ -1,7 +1,7 @@
 [
-  {"name": "Materialious", "tags": ["pink", "abstract"], "url": "Materialious.jpg"},
-  {"name": "osu", "tags": ["game"], "url": "osu.jpg"},
-  {"name": "tutamail", "tags": ["gold", "fluid"], "url": "tutamail.jpg"},
-  {"name": "Bazaar", "tags": ["gold", "fluid"], "url": "Bazaar.jpg"},
-  {"name": "akizip", "tags": ["gold", "fluid"], "url": "akizip.jpg"}
+  {"name": "Materialious", "tags": ["flathub", "player"], "url": "Materialious.jpg"},
+  {"name": "osu!", "tags": ["flathub","game"], "url": "osu.jpg"},
+  {"name": "Tuta", "tags": ["flathub", "mail"], "url": "tutamail.jpg"},
+  {"name": "Bazaar", "tags": ["flathub", "client"], "url": "Bazaar.jpg"},
+  {"name": "akizip", "tags": ["flathub", "zip"], "url": "akizip.jpg"}
 ]
