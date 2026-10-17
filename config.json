@@ -1,5 +1,8 @@
 [
   {"name": "Materialious", "tags": ["pink", "abstract"], "url": "Materialious.jpg"},
-  {"name": "osu", "tags": ["game"], "url": "osu.jpg"},
-  {"name": "tutamail", "tags": ["gold", "fluid"], "url": "tutamail.jpg"}
+  {"name": "Osu", "tags": ["game"], "url": "osu.jpg"},
+  {"name": "Tutamail", "tags": ["gold", "fluid"], "url": "tutamail.jpg"}
+  {"name": "Bazaar", "tags": ["gold", "fluid"], "url": "Bazaar.jpg"}
+  {"name": "Akizip", "tags": ["gold", "fluid"], "url": "akizip.jpg"}
+  
 ]
