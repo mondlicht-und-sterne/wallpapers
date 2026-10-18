@@ -6,5 +6,6 @@
   {"name": "Akizip", "tags": ["flathub", "zip"], "url": "akizip.jpg"},
   {"name": "mpv", "tags": ["flathub", "player"], "url": "mpv.jpg"},
   {"name": "SelfPrivacy", "tags": ["flathub", "mail"], "url": "selfprivacy.jpg"},
-  {"name": "Easyflatpak", "tags": ["flathub", "client"], "url": "easyflatpak.jpg"}
+  {"name": "Easyflatpak", "tags": ["flathub", "client"], "url": "easyflatpak.jpg"},
+  {"name": "QtCreator", "tags": ["flathub", "client"], "url": "QtCreator.jpg"}
 ]
